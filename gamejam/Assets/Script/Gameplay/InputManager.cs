@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 public class InputManager : MonoBehaviour
 {
@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
 	{
 		Input.simulateMouseWithTouches = true;
 		direction = CheckInput ();
-		if(_gameplay.state == (int)Gameplay.State.Ready){
+		if(_gameplay.state == (int)Gameplay.State.Normal && _gameplay.isWin == false){
 			if (direction.HasValue) {
 				_gameplay.checkMoveAble (direction.Value);
 				direction = null;

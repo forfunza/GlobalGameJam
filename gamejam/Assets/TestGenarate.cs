@@ -15,5 +15,6 @@ public class TestGenarate : MonoBehaviour {
 
 	public void GenarateTileLog(){
 		GameEngine.RandomTilesList();
+		GameEngine.RandomBox(4);
 	}
 }

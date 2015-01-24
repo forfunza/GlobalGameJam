@@ -88,6 +88,8 @@ public class GameEngine
 								tilesTemp.Add (new TileModel (0, j, i));
 						}
 				}
+
+
 				for (int i=0; i<Config.TYPE_LIST.Length; i++) {
 						for (int j=0; j<(tilePlayCount-fractionTile)/Config.TYPE_LIST.Length; j++) {
 								types.Add (Config.TYPE_LIST [i]);
@@ -145,7 +147,7 @@ public class GameEngine
 				List<TileModel> listBoxTemp = new List<TileModel> ();
 				for (int i=0; i<Config.SIZE_OF_GRID; i++) {
 						for (int j=0; j<Config.SIZE_OF_GRID; j++) {
-								listBoxTemp.Add (new TileModel (0, j, i));
+								listBoxTemp.Add (new TileModel (4, j, i));
 						}
 				}
 

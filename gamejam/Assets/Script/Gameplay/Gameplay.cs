@@ -1,16 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Gameplay: MonoBehaviour
 {
 		public GameObject tilePrefab;
-		public float distanceBetweenTiles = 1.0f;
-		private Sprite myTile;
+		public float distanceBetweenTiles = 2.0f;
+		private Sprite tileTree;
+		private Sprite tileFire;
+		private Sprite tileOil;
+		private Sprite tileDoor;
+		protected int score = 0;
+		protected int moveCount = 0;
+		public bool isWin = false;
+		public Text scoreText;
+		private float countdown;
+
 		public enum State
 		{
-				Prepare = 0,
-				Ready = 1
+				Animate = 0,
+				Normal = 1,
+				Check = 2,
+				Lose = 3,
+				Win = 4
 		}
 
 		public int state;
@@ -18,19 +31,33 @@ public class Gameplay: MonoBehaviour
 		private int yIndex;
 		private int xTempIndex;
 		private int yTempIndex;
-		private Dictionary<string,GameObject> _tilesBox = new Dictionary<string,GameObject> ();
-
+		private Dictionary<string,GameObject> _tiles = new Dictionary<string,GameObject> ();
+		private Dictionary<string,GameObject> _boxes = new Dictionary<string,GameObject> ();
 		// Use this for initialization
 		void Start ()
-		{
-				myTile = Resources.Load ("Image/tree", typeof(Sprite)) as Sprite;
+		{	
+				countdown = Config.TIME_GAMEPLAY;
+				scoreText.text = score.ToString ();
+				tileTree = Resources.Load <Sprite> ("Image/tree");
+				tileFire = Resources.Load <Sprite> ("Image/fire");
+				tileOil = Resources.Load <Sprite> ("Image/oil");
+				tileDoor = Resources.Load <Sprite> ("Image/door");
+				
 				CreateTiles ();
-				state = (int)State.Ready;
+				state = (int)State.Normal;
 		}
 	
 		// Update is called once per frame
 		void Update ()
 		{
+
+				if (state == (int)State.Normal) {
+						countdown -= Time.deltaTime;
+						if (countdown < 0) {
+								state = (int)State.Lose;
+								Debug.Log ("You Lose +++++++++++++++++++");
+						}
+				}
 	
 		}
 
@@ -42,19 +69,24 @@ public class Gameplay: MonoBehaviour
 
 
 				TileModel[,] _allTiles = GameEngine.RandomTilesList ();
+				List<TileModel> _allBox = GameEngine.RandomBox (Config.SIZE_OF_BOX);
 
 				for (int rows = 0; rows < Config.SIZE_OF_GRID; rows++) {
 		
 						for (int cols = 0; cols < Config.SIZE_OF_GRID; cols++) {
 
-								Debug.Log (_allTiles [cols, rows]);
 
 								xOffset += distanceBetweenTiles;
 
 								GameObject _tileObject = GameObject.Instantiate (tilePrefab, new Vector3 (transform.position.x + xOffset, transform.position.y + yOffset, transform.position.z), transform.rotation) as GameObject;
 								Tile _tile = _tileObject.GetComponent<Tile> ();
 								SpriteRenderer _sprite = _tileObject.GetComponent<SpriteRenderer> ();
-								_sprite.sprite = myTile;
+								if (_allTiles [cols, rows].type == 1)
+										_sprite.sprite = tileTree;
+								else if (_allTiles [cols, rows].type == 2)
+										_sprite.sprite = tileFire;
+								else if (_allTiles [cols, rows].type == 3)
+										_sprite.sprite = tileOil;
 								_tile.x = _allTiles [cols, rows].x;
 								_tile.y = _allTiles [cols, rows].y;
 								_tile.type = _allTiles [cols, rows].type;
@@ -62,19 +94,32 @@ public class Gameplay: MonoBehaviour
 								if (_tile.type == 0) {
 										xIndex = _allTiles [cols, rows].x;
 										yIndex = _allTiles [cols, rows].y;
-					_sprite.sprite = null;
+										_sprite.sprite = null;
 								}
 
-								_tilesBox.Add (cols.ToString () + rows.ToString (), _tileObject);
+								_tiles.Add (cols.ToString () + rows.ToString (), _tileObject);
 						}
 						yOffset -= distanceBetweenTiles;
 						xOffset = 0;
+				}
+
+				foreach (TileModel _box in _allBox) {
+				
+						GameObject _tileObject = GameObject.Instantiate (tilePrefab, new Vector3 (_tiles [_box.x.ToString () + _box.y.ToString ()].gameObject.transform.position.x, _tiles [_box.x.ToString () + _box.y.ToString ()].gameObject.transform.position.y, transform.position.z), transform.rotation) as GameObject;
+						Tile _tile = _tileObject.GetComponent<Tile> ();
+						_tile.type = _box.type;
+						SpriteRenderer _sprite = _tileObject.GetComponent<SpriteRenderer> ();
+						_sprite.sprite = tileDoor;
+						
+						_boxes.Add (_box.x.ToString () + _box.y.ToString (), _tileObject);
+
 				}
 
 		}
 
 		public void checkMoveAble (int direction)
 		{
+				
 				if (direction == 0) {
 						xTempIndex = xIndex;
 						yTempIndex = yIndex + 1;
@@ -95,7 +140,7 @@ public class Gameplay: MonoBehaviour
 
 
 
-				if (_tilesBox.ContainsKey (xTempIndex.ToString () + yTempIndex.ToString ())) {
+				if (_tiles.ContainsKey (xTempIndex.ToString () + yTempIndex.ToString ())) {
 
 						moveTile (xTempIndex, yTempIndex, xIndex, yIndex);
 
@@ -108,11 +153,11 @@ public class Gameplay: MonoBehaviour
 		void moveTile (int x1, int y1, int x2, int y2)
 		{
 
-				state = (int)State.Prepare;
+				state = (int)State.Animate;
 
-				Vector3 _previousMovePosition = _tilesBox [x1.ToString () + y1.ToString ()].transform.position;
-				GameObject _moveTileObject = _tilesBox [x1.ToString () + y1.ToString ()];
-				GameObject _blankTileObject = _tilesBox [x2.ToString () + y2.ToString ()];
+				Vector3 _previousMovePosition = _tiles [x1.ToString () + y1.ToString ()].transform.position;
+				GameObject _moveTileObject = _tiles [x1.ToString () + y1.ToString ()];
+				GameObject _blankTileObject = _tiles [x2.ToString () + y2.ToString ()];
 //				_moveTileObject.transform.position = _blankTileObject.transform.position;
 				
 				Hashtable ht = new Hashtable ();
@@ -127,16 +172,51 @@ public class Gameplay: MonoBehaviour
 
 				xIndex = x1;
 				yIndex = y1;
-				_tilesBox [x1.ToString () + y1.ToString ()] = _blankTileObject;
-				_tilesBox [x2.ToString () + y2.ToString ()] = _moveTileObject;
+				_tiles [x1.ToString () + y1.ToString ()] = _blankTileObject;
+				_tiles [x2.ToString () + y2.ToString ()] = _moveTileObject;
+				moveCount++;
+				checkTileInBox ();
 		
 
+		}
+
+		void checkTileInBox ()
+		{
+				state = (int)State.Check;
+				score = 0;
+				for (int rows = 0; rows < Config.SIZE_OF_GRID; rows++) {
+			
+						for (int cols = 0; cols < Config.SIZE_OF_GRID; cols++) {
+								Tile _checkTile = _tiles [cols.ToString () + rows.ToString ()].GetComponent<Tile> ();
+								if (_checkTile.type == 1) {
+										if (_boxes.ContainsKey (cols.ToString () + rows.ToString ()))
+												score++;
+								}
+
+
+						}
+				}
+				state = (int)State.Normal;
+				scoreText.text = score.ToString ();
+				if (score == Config.SIZE_OF_BOX) {
+						state = (int)State.Win;
+						isWin = true;
+						Debug.Log ("You Win +++++++++++++++++++++");
+				}
+				
+				
 		}
 
 		void tweenComplete ()
 		{
 //				Debug.Log("aaaa");
-				state = (int)State.Ready;
+				state = (int)State.Normal;
+		}
+
+		public float GetTimeLeft {
+				get {
+						return countdown;
+				}
 		}
 }
 

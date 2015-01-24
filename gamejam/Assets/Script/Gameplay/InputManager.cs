@@ -11,13 +11,13 @@ public class InputManager : MonoBehaviour
 	Vector3? start = null, end = null;
 	int? direction = null;
 	int previousDirection = 0;
-	Grid _grid;
+	Gameplay _gameplay;
 
 	
 	void Start ()
 	{
 		distanceThreshold = Screen.dpi / 25.4f * mmDistanceThreshold;
-		_grid = GameObject.Find ("Grid").GetComponent<Grid> ();
+		_gameplay = GameObject.Find ("Gameplay").GetComponent<Gameplay> ();
 		Input.simulateMouseWithTouches = true;
 		countdown = autoPlayInterval;
 	}
@@ -60,9 +60,9 @@ public class InputManager : MonoBehaviour
 	{
 		Input.simulateMouseWithTouches = true;
 		direction = CheckInput ();
-		if(_grid.state == (int)Grid.State.Ready){
+		if(_gameplay.state == (int)Gameplay.State.Ready){
 			if (direction.HasValue) {
-				_grid.move (direction.Value);
+				_gameplay.checkMoveAble (direction.Value);
 				direction = null;
 				start = null;
 			}

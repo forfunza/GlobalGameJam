@@ -62,7 +62,7 @@ public class InputManager : MonoBehaviour
 		direction = CheckInput ();
 		if(_grid.state == (int)Grid.State.Ready){
 			if (direction.HasValue) {
-				_grid.move (direction.Value);
+				_grid.checkMoveAble (direction.Value);
 				direction = null;
 				start = null;
 			}

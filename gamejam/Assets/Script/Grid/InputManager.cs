@@ -12,7 +12,6 @@ public class InputManager : MonoBehaviour
 	int? direction = null;
 	int previousDirection = 0;
 	Grid _grid;
-
 	
 	void Start ()
 	{

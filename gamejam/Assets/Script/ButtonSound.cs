@@ -20,16 +20,21 @@ public class ButtonSound : MonoBehaviour {
 	public AudioClip gameOver;
 
 
-
-	// Use this for initialization
-	void Start () {
+	void Start() {
+		alarm = (AudioClip) Resources.Load(Config.SOUND+Config.ALARM, typeof(AudioClip)) ;
+		bgmGameplay = (AudioClip) Resources.Load(Config.SOUND+Config.GAMEPLAY_BGM, typeof(AudioClip)); 
+		bgmMainMenu = (AudioClip) Resources.Load(Config.SOUND+Config.BGM_MAIN_MENU, typeof(AudioClip)); 
+		errorMove = (AudioClip) Resources.Load(Config.SOUND+Config.ERROR_MOVE, typeof(AudioClip)); 
+		closePopup = (AudioClip) Resources.Load(Config.SOUND+Config.CLOSE_POPUP, typeof(AudioClip)); 
+		openPopup = (AudioClip) Resources.Load(Config.SOUND+Config.OPEN_POPUP, typeof(AudioClip)); 
+		tileMove = (AudioClip) Resources.Load(Config.SOUND+Config.TILE_MOVE, typeof(AudioClip)); 
+		tileMission = (AudioClip) Resources.Load(Config.SOUND+Config.TILE_MISSION, typeof(AudioClip)); 
+		completeMission = (AudioClip) Resources.Load(Config.SOUND+Config.WIN_GAME, typeof(AudioClip)); 
+		pressButton = (AudioClip) Resources.Load(Config.SOUND+Config.PRESS_BUTTON, typeof(AudioClip)); 
+		gameOver = (AudioClip) Resources.Load(Config.SOUND+Config.GAMEOVER, typeof(AudioClip));
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 	public void PlaySound() {
 		switch (soundType){
 		case SoundType.Alarm:

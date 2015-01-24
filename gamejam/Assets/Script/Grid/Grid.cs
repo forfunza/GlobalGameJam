@@ -14,6 +14,7 @@ public class Grid : MonoBehaviour
 		private Sprite myTile;
 		public enum State
 		{
+				Prepare = 0,
 				Ready = 1
 		}
 
@@ -135,22 +136,24 @@ public class Grid : MonoBehaviour
 
 		void moveTile (int x1, int y1, int x2, int y2)
 		{
-//		Debug.Log("Old : "+ x1 + " " + y1);
-//		Debug.Log("New : "+ x2 + " " + y2);
+
+				state = (int)State.Prepare;
+
 				Vector3 _previousMovePosition = _tilesBox [x1.ToString () + y1.ToString ()].transform.position;
 				GameObject _moveTileObject = _tilesBox [x1.ToString () + y1.ToString ()];
 				GameObject _blankTileObject = _tilesBox [x2.ToString () + y2.ToString ()];
-				_moveTileObject.transform.position = _blankTileObject.transform.position;
-				_blankTileObject.transform.position = _previousMovePosition;
-
+//				_moveTileObject.transform.position = _blankTileObject.transform.position;
+				
 				Hashtable ht = new Hashtable();
-				ht.Add("x",x2);
-				ht.Add("y",y2);
-				ht.Add("time",1);
+				ht.Add("x",_blankTileObject.transform.position.x);
+				ht.Add("y",_blankTileObject.transform.position.y);
+				ht.Add("time",0.3);
 				ht.Add("onComplete","tweenComplete");
 				ht.Add("onCompleteTarget",gameObject);
 				iTween.MoveTo(_moveTileObject,ht);
-		
+
+				_blankTileObject.transform.position = _previousMovePosition;
+
 				xIndex = x1;
 				yIndex = y1;
 				_tilesBox[x1.ToString () + y1.ToString ()] = _blankTileObject;
@@ -160,7 +163,8 @@ public class Grid : MonoBehaviour
 		}
 
 		void tweenComplete(){
-				Debug.Log("aaaa");
+//				Debug.Log("aaaa");
+				state = (int)State.Ready;
 		}
 }
 

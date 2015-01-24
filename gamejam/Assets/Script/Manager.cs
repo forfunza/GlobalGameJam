@@ -5,6 +5,7 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		DontDestroyOnLoad(transform.gameObject);
 		SoundManager.Instance.AutoRunManager();
 	}
 	
@@ -12,4 +13,5 @@ public class Manager : MonoBehaviour {
 	void Update () {
 	
 	}
+
 }

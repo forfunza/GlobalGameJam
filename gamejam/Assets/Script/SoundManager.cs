@@ -19,17 +19,17 @@ public class SoundManager : Singleton<SoundManager> {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Application.loadedLevelName == "MainScreen" || Application.loadedLevelName == "WorldMap" && !checkRun){
+		if (Application.loadedLevelName.Equals("MainScreen") && !checkRun  || Application.loadedLevelName.Equals("WorldMap") && !checkRun){
 			bgm = gameObject.AddComponent<AudioSource>();
-			bgm.clip = (AudioClip) Resources.Load("Sound/"+"171493__fins__alarm", typeof(AudioClip));
+			bgm.clip = (AudioClip) Resources.Load(Config.SOUND+Config.BGM_MAIN_MENU, typeof(AudioClip));
 			bgm.loop = true;
 			bgm.Play ();
 			checkRun = true;
 		}
-		else if (Application.loadedLevelName == "Gameplay")
+		else if (Application.loadedLevelName == "Gameplay" && !checkRun)
 		{
 			bgm = gameObject.AddComponent<AudioSource>();
-			bgm.clip = (AudioClip) Resources.Load("Sound/"+"171493__fins__alarm", typeof(AudioClip));
+			bgm.clip = (AudioClip) Resources.Load(Config.SOUND+Config.GAMEPLAY_BGM, typeof(AudioClip));
 			bgm.loop = true;
 			bgm.Play ();
 			checkRun = true;
@@ -41,11 +41,12 @@ public class SoundManager : Singleton<SoundManager> {
 		audio.clip = clip;
 		audio.Play();
 	}
-	public void AutoPlayBGM() {
+	public void ChangeScene() {
+		checkRun = false;
+	}
+	public void AutoRunManager() {
 
 	}
-	public void AutoRunManager()
-	{
-	}
+
 
 }

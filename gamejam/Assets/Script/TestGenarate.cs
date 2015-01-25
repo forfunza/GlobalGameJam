@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TestGenarate : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -14,7 +15,8 @@ public class TestGenarate : MonoBehaviour {
 	}
 
 	public void GenarateTileLog(){
-		GameEngine.RandomTilesList();
 		GameEngine.RandomBox(4);
+//		GameEngine.RandomTilesList();
+		GameEngine.RandomTilesListWithStage(1);
 	}
 }

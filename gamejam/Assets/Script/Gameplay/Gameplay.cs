@@ -16,6 +16,7 @@ public class Gameplay: MonoBehaviour
 		public bool isWin = false;
 		public Text scoreText;
 		private float countdown;
+		public GameObject popupGameOver;
 
 		public enum State
 		{
@@ -36,15 +37,18 @@ public class Gameplay: MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{	
-				countdown = Config.TIME_GAMEPLAY;
+				countdown = Config.timeGamePlay [GameEngine.Instance.gameStage + 1];
 				scoreText.text = score.ToString ();
-				tileTree = Resources.Load <Sprite> ("Image/tree");
-				tileFire = Resources.Load <Sprite> ("Image/fire");
-				tileOil = Resources.Load <Sprite> ("Image/oil");
-				tileDoor = Resources.Load <Sprite> ("Image/door");
+		tileTree = Resources.Load <Sprite> ("Image/UI_GamePlay/leaft");
+		tileFire = Resources.Load <Sprite> ("Image/UI_GamePlay/fire");
+		tileOil = Resources.Load <Sprite> ("Image/UI_GamePlay/wood");
+		tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block-left");
 				
 				CreateTiles ();
 				state = (int)State.Normal;
+
+				GameObject go = (GameObject)Instantiate (popupGameOver, transform.position, transform.rotation);
+
 		}
 	
 		// Update is called once per frame
@@ -55,7 +59,10 @@ public class Gameplay: MonoBehaviour
 						countdown -= Time.deltaTime;
 						if (countdown < 0) {
 								state = (int)State.Lose;
-								Debug.Log ("You Lose +++++++++++++++++++");
+								GameObject go = (GameObject)Instantiate (popupGameOver, transform.position, transform.rotation);
+								PopupGameOver popupScript = go.GetComponentInChildren<PopupGameOver> ();
+								popupScript.gameOver ();
+								Debug.Log ("You Lose +++++++++++++++++++");	
 						}
 				}
 	
@@ -68,8 +75,7 @@ public class Gameplay: MonoBehaviour
 				float yOffset = 0.0f;
 
 
-				TileModel[,] _allTiles = GameEngine.RandomTilesList ();
-				List<TileModel> _allBox = GameEngine.RandomBox (Config.SIZE_OF_BOX);
+				TileModel[,] _allTiles = GameEngine.RandomTilesListWithStage (GameEngine.Instance.gameStage);
 
 				for (int rows = 0; rows < Config.SIZE_OF_GRID; rows++) {
 		
@@ -103,17 +109,29 @@ public class Gameplay: MonoBehaviour
 						xOffset = 0;
 				}
 
-				foreach (TileModel _box in _allBox) {
-				
-						GameObject _tileObject = GameObject.Instantiate (tilePrefab, new Vector3 (_tiles [_box.x.ToString () + _box.y.ToString ()].gameObject.transform.position.x, _tiles [_box.x.ToString () + _box.y.ToString ()].gameObject.transform.position.y, transform.position.z), transform.rotation) as GameObject;
+				int[,] boxList = Config.boxTileStage [GameEngine.Instance.gameStage];
+
+				for (int i =0; i<=boxList.GetUpperBound(0); i++) {
+						GameObject _tileObject = GameObject.Instantiate (tilePrefab, new Vector3 (_tiles [boxList [i, 0].ToString () + boxList [i, 1].ToString ()].gameObject.transform.position.x, _tiles [boxList [i, 0].ToString () + boxList [i, 1].ToString ()].gameObject.transform.position.y, transform.position.z), transform.rotation) as GameObject;
 						Tile _tile = _tileObject.GetComponent<Tile> ();
-						_tile.type = _box.type;
+						_tile.type = 4;
 						SpriteRenderer _sprite = _tileObject.GetComponent<SpriteRenderer> ();
 						_sprite.sprite = tileDoor;
-						
-						_boxes.Add (_box.x.ToString () + _box.y.ToString (), _tileObject);
-
+						_boxes.Add (boxList [i, 0].ToString () + boxList [i, 1].ToString (), _tileObject);
+			
 				}
+
+//				foreach (TileModel _box in _allBox) {
+//				
+//						GameObject _tileObject = GameObject.Instantiate (tilePrefab, new Vector3 (_tiles [_box.x.ToString () + _box.y.ToString ()].gameObject.transform.position.x, _tiles [_box.x.ToString () + _box.y.ToString ()].gameObject.transform.position.y, transform.position.z), transform.rotation) as GameObject;
+//						Tile _tile = _tileObject.GetComponent<Tile> ();
+//						_tile.type = _box.type;
+//						SpriteRenderer _sprite = _tileObject.GetComponent<SpriteRenderer> ();
+//						_sprite.sprite = tileDoor;
+//						
+//						_boxes.Add (_box.x.ToString () + _box.y.ToString (), _tileObject);
+//
+//				}
 
 		}
 
@@ -201,10 +219,39 @@ public class Gameplay: MonoBehaviour
 				if (score == Config.SIZE_OF_BOX) {
 						state = (int)State.Win;
 						isWin = true;
+						GameObject go = (GameObject)Instantiate (popupGameOver, transform.position, transform.rotation);
+						PopupGameOver popupScript = go.GetComponentInChildren<PopupGameOver> ();
+						popupScript.gameWin (getStarFromTime (countdown));
+						//add nextStage
+						if (!PlayerPrefs.HasKey (Config.STAR_OF_STATE + (GameEngine.Instance.gameStage + 1))) {
+								PlayerPrefs.SetInt (Config.STAR_OF_STATE + (GameEngine.Instance.gameStage + 1), 0);
+								PlayerPrefs.Save ();
+						}
+						//add star
+						if (getStarFromTime (countdown) > PlayerPrefs.GetInt (Config.STAR_OF_STATE + (GameEngine.Instance.gameStage))) {
+								PlayerPrefs.SetInt (Config.STAR_OF_STATE + GameEngine.Instance.gameStage, getStarFromTime (countdown));
+								PlayerPrefs.Save ();
+						}
+
 						Debug.Log ("You Win +++++++++++++++++++++");
 				}
 				
 				
+		}
+
+		private int getStarFromTime (float time)
+		{
+				int star = 0;
+				int maxTime = Config.timeGamePlay [GameEngine.Instance.gameStage + 1];
+				int percentage = (int)time * 100 / maxTime;
+				if (percentage > 60) {
+						star = 3;
+				} else if (percentage > 40) {
+						star = 2;
+				} else if (percentage > 20) {
+						star = 1;
+				}
+				return star;
 		}
 
 		void tweenComplete ()

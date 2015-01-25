@@ -1,18 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 public class StageButton : MonoBehaviour {
 
 	public int stage;
 	public Image star1;
 	public Image star2;
 	public Image star3;
+	public Image numberImage;
+	public Button stageButton;
 	// Use this for initialization
 	void Start () {
 		if(PlayerPrefs.HasKey(Config.STAR_OF_STATE+stage)){
 			setStar(PlayerPrefs.GetInt(Config.STAR_OF_STATE+stage));
 		}else{
 			setStar(0);
+			numberImage.enabled = false;
+			stageButton.image.sprite = Resources.Load<Sprite>("Image/map_popup/lock_level");
+			stageButton.enabled = false;
 		}
 	}
 	
@@ -35,5 +41,10 @@ public class StageButton : MonoBehaviour {
 			star2.enabled = true;
 			star3.enabled = true;
 		}
+	}
+
+	public void PlayGame(){
+		GameEngine.Instance.gameStage = stage;
+		Application.LoadLevel ("Gameplay");
 	}
 }

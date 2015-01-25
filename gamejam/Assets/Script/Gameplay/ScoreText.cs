@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScoreText : MonoBehaviour
+public class ScoreText : MonoBehaviour 
 {
 
 		private string text;

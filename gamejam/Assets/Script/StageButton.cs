@@ -8,12 +8,17 @@ public class StageButton : MonoBehaviour {
 	public Image star1;
 	public Image star2;
 	public Image star3;
+	public Image numberImage;
+	public Button stageButton;
 	// Use this for initialization
 	void Start () {
 		if(PlayerPrefs.HasKey(Config.STAR_OF_STATE+stage)){
 			setStar(PlayerPrefs.GetInt(Config.STAR_OF_STATE+stage));
 		}else{
 			setStar(0);
+			numberImage.enabled = false;
+			stageButton.image.sprite = Resources.Load<Sprite>("Image/map_popup/lock_level");
+			stageButton.enabled = false;
 		}
 	}
 	

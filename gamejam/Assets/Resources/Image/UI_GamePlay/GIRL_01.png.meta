@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: 0c1478276e525471fbe4028bca609637
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: GIRL_Head
+    21300002: GIRL_Top_Arm
+    21300004: GIRL_Arm
+    21300006: GIRL_Body
+    21300008: GIRL_Hip
+    21300010: GIRL_Leg
+    21300012: GIRL_Top_Leg
+    21300014: GIRL_Face_01
+    21300016: GIRL_Face_02
+    21300018: GIRL_Face_03
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: GIRL_Head
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 501
+        width: 377
+        height: 375
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Top_Arm
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 391
+        width: 55
+        height: 85
+      alignment: 9
+      pivot: {x: .722978652, y: .925626874}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Arm
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 311
+        width: 48
+        height: 54
+      alignment: 9
+      pivot: {x: .755496323, y: .886083543}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Body
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 346
+        width: 112
+        height: 102
+      alignment: 9
+      pivot: {x: .565259397, y: .238857791}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Hip
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 208
+        width: 145
+        height: 104
+      alignment: 9
+      pivot: {x: .51279968, y: .71878463}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Leg
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 212
+        width: 35
+        height: 68
+      alignment: 9
+      pivot: {x: .511875689, y: .891978979}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Top_Leg
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 216
+        width: 42
+        height: 80
+      alignment: 9
+      pivot: {x: .674679697, y: .879928589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Face_01
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 713
+        width: 160
+        height: 107
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Face_02
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 527
+        width: 167
+        height: 96
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: GIRL_Face_03
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 335
+        width: 167
+        height: 97
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

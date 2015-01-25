@@ -37,17 +37,17 @@ public class Gameplay: MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{	
-				countdown = Config.timeGamePlay [GameEngine.Instance.gameStage + 1];
+				countdown = Config.timeGamePlay [GameEngine.Instance.gameStage - 1];
 				scoreText.text = score.ToString ();
 		tileTree = Resources.Load <Sprite> ("Image/UI_GamePlay/leaft");
 		tileFire = Resources.Load <Sprite> ("Image/UI_GamePlay/fire");
 		tileOil = Resources.Load <Sprite> ("Image/UI_GamePlay/wood");
-		tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block-left");
+		tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block_tree_new");
 				
 				CreateTiles ();
 				state = (int)State.Normal;
 
-				GameObject go = (GameObject)Instantiate (popupGameOver, transform.position, transform.rotation);
+			
 
 		}
 	
@@ -242,7 +242,7 @@ public class Gameplay: MonoBehaviour
 		private int getStarFromTime (float time)
 		{
 				int star = 0;
-				int maxTime = Config.timeGamePlay [GameEngine.Instance.gameStage + 1];
+				int maxTime = Config.timeGamePlay [GameEngine.Instance.gameStage - 1];
 				int percentage = (int)time * 100 / maxTime;
 				if (percentage > 60) {
 						star = 3;

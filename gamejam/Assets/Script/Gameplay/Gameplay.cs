@@ -39,10 +39,10 @@ public class Gameplay: MonoBehaviour
 		{	
 				countdown = Config.timeGamePlay [GameEngine.Instance.gameStage + 1];
 				scoreText.text = score.ToString ();
-				tileTree = Resources.Load <Sprite> ("Image/tree");
-				tileFire = Resources.Load <Sprite> ("Image/fire");
-				tileOil = Resources.Load <Sprite> ("Image/oil");
-				tileDoor = Resources.Load <Sprite> ("Image/door");
+		tileTree = Resources.Load <Sprite> ("Image/UI_GamePlay/leaft");
+		tileFire = Resources.Load <Sprite> ("Image/UI_GamePlay/fire");
+		tileOil = Resources.Load <Sprite> ("Image/UI_GamePlay/wood");
+		tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block-left");
 				
 				CreateTiles ();
 				state = (int)State.Normal;

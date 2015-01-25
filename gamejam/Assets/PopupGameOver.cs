@@ -18,7 +18,7 @@ public class PopupGameOver : MonoBehaviour {
 
 		Hashtable ht = new Hashtable ();
 		ht.Add ("x", rectTranform.transform.position.x);
-		ht.Add ("y", 175);
+		ht.Add ("y", 270);
 		ht.Add ("time", 1);
 		ht.Add ("easetype","spring");
 		ht.Add ("onComplete", "tweenComplete");

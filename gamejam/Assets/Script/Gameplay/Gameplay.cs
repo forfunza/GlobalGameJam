@@ -17,6 +17,10 @@ public class Gameplay: MonoBehaviour
 		public Text scoreText;
 		private float countdown;
 		public GameObject popupGameOver;
+		private int moveMatchCount;
+		public GameObject SkyFallEffect;
+		public GameObject AuraEffect;
+		
 
 		public enum State
 		{
@@ -172,7 +176,7 @@ public class Gameplay: MonoBehaviour
 
 		void moveTile (int x1, int y1, int x2, int y2)
 		{
-
+				moveMatchCount = 0;
 				state = (int)State.Animate;
 
 				Vector3 _previousMovePosition = _tiles [x1.ToString () + y1.ToString ()].transform.position;
@@ -209,13 +213,19 @@ public class Gameplay: MonoBehaviour
 						for (int cols = 0; cols < Config.SIZE_OF_GRID; cols++) {
 								Tile _checkTile = _tiles [cols.ToString () + rows.ToString ()].GetComponent<Tile> ();
 								if (_checkTile.type == 1) {
-										if (_boxes.ContainsKey (cols.ToString () + rows.ToString ()))
+										if (_boxes.ContainsKey (cols.ToString () + rows.ToString ())){
 												score++;
+						moveMatchCount++;
+									}
 								}
 
 
 						}
 				}
+
+		if(moveMatchCount == 1){
+			GameObject.Instantiate(SkyFallEffect);
+		}
 				state = (int)State.Normal;
 				scoreText.text = scoreText.text = score.ToString () + "/" + (Config.boxTileStage [GameEngine.Instance.gameStage].GetUpperBound (0) + 1).ToString ();
 

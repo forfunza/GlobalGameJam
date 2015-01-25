@@ -21,8 +21,8 @@ public class Gameplay: MonoBehaviour
 		private int moveMatchCount;
 		public GameObject SkyFallEffect;
 		public GameObject AuraEffect;
-		
-
+		private GameObject effectGameObject = null;
+	
 		public enum State
 		{
 				Animate = 0,
@@ -208,9 +208,9 @@ public class Gameplay: MonoBehaviour
 
 		IEnumerator removeEffect (GameObject effect)
 		{
-				yield return new WaitForSeconds (UnityEngine.Random.Range (1.5F, 3.0F));
-		GameObject.Destroy (AuraEffect);
-		Debug.Log("destroy Effect");
+				yield return new WaitForSeconds (UnityEngine.Random.Range (2.5F, 5.0F));
+				GameObject.Destroy (effectGameObject);
+				Debug.Log ("destroy Effect");
 		}
 
 		void checkTileInBox ()
@@ -233,8 +233,10 @@ public class Gameplay: MonoBehaviour
 				}
 
 				if (moveMatchCount == 1) {
-						AuraEffect =  GameObject.Instantiate (SkyFallEffect) as GameObject;
-						StartCoroutine (removeEffect (SkyFallEffect));
+						if (effectGameObject == null) {
+								effectGameObject = GameObject.Instantiate (SkyFallEffect) as GameObject;
+								StartCoroutine (removeEffect (SkyFallEffect));
+						}
 				}
 				state = (int)State.Normal;
 				scoreText.text = scoreText.text = score.ToString () + "/" + (Config.boxTileStage [GameEngine.Instance.gameStage].GetUpperBound (0) + 1).ToString ();

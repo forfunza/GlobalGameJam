@@ -21,12 +21,13 @@ public class ManagerButton : MonoBehaviour {
 		Application.LoadLevel(sceneName);
 	}
 	public void TitleOut () {
-		StartCoroutine(WaitASec(waitTime));
+		//StartCoroutine(WaitASec(waitTime));
+		iTween.MoveAdd(title,iTween.Hash("amount" ,amount,"time",time)); 
 	}
 	IEnumerator WaitASec(float waitTime){
 		yield return new WaitForSeconds(waitTime);
-		iTween.MoveAdd(title,iTween.Hash("amount" ,amount,"time",time)); 
-		iTween.MoveAdd(button,iTween.Hash("amount" ,amount,"time",time));
+
+		//iTween.MoveAdd(button,iTween.Hash("amount" ,amount,"time",time));
 
 		Debug.Log ("Waited a sec");
 	}

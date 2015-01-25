@@ -45,18 +45,18 @@ public class PopupGameOver : MonoBehaviour {
 
 	public void gameWin(int star){
 //		messageText.text = "You Win !!";
-		if(star == 3){
+		starImage1.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star_BG");
+		starImage2.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star_BG");
+		starImage3.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star_BG");
+		if(star == 1){
 			starImage1.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
-			starImage2.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
-			starImage3.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
 		}else if(star == 2){
 			starImage1.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
 			starImage2.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
-			starImage3.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star_BG");
-		}if(star == 1){
+		}else if(star == 3){
 			starImage1.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
-			starImage2.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star_BG");
-			starImage3.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star_BG");
+			starImage2.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
+			starImage3.sprite = Resources.Load<Sprite>("Image/UI_PopUp/Star");
 		}
 	}
 }

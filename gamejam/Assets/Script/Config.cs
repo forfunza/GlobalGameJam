@@ -21,7 +21,7 @@ public class Config
 		{2,new [,]{{0,0},{0,1},{0,2},{0,3}}}
 	};
 
-
+		public static int[] timeGamePlay = new int[]{10,10,10};
 		public const string ALARM = "Alarm";
 		public const string BGM_MAIN_MENU = "BgmMainMenu";
 		public const string TILE_MISSION = "TileMission";
@@ -33,7 +33,7 @@ public class Config
 		public const string CLOSE_POPUP = "ClosePopup";
 		public const string GAMEOVER = "Gameover";
 		public const string GAMEPLAY_BGM = "GameplayBgm";
-		public static float TIME_GAMEPLAY = 5.0F;
+		
 		public const string SOUND = "Sound/";
 
 

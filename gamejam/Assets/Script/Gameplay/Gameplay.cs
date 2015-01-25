@@ -37,7 +37,7 @@ public class Gameplay: MonoBehaviour
 		// Use this for initialization
 		void Start ()
 		{	
-				countdown = Config.TIME_GAMEPLAY;
+				countdown = Config.timeGamePlay[GameEngine.Instance.gameStage+1];
 				scoreText.text = score.ToString ();
 				tileTree = Resources.Load <Sprite> ("Image/tree");
 				tileFire = Resources.Load <Sprite> ("Image/fire");

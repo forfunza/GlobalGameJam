@@ -17,6 +17,8 @@ public class Gameplay: MonoBehaviour
 		public Text scoreText;
 		private float countdown;
 
+		public GameObject popupGameOver;
+
 		public enum State
 		{
 				Animate = 0,
@@ -55,7 +57,10 @@ public class Gameplay: MonoBehaviour
 						countdown -= Time.deltaTime;
 						if (countdown < 0) {
 								state = (int)State.Lose;
-								Debug.Log ("You Lose +++++++++++++++++++");
+								GameObject go = (GameObject)Instantiate(popupGameOver,transform.position,transform.rotation);
+								PopupGameOver popupScript = go.GetComponentInChildren<PopupGameOver>();
+								popupScript.gameOver();
+								Debug.Log ("You Lose +++++++++++++++++++");	
 						}
 				}
 	
@@ -201,6 +206,9 @@ public class Gameplay: MonoBehaviour
 				if (score == Config.SIZE_OF_BOX) {
 						state = (int)State.Win;
 						isWin = true;
+						GameObject go = (GameObject)Instantiate(popupGameOver,transform.position,transform.rotation);
+						PopupGameOver popupScript = go.GetComponentInChildren<PopupGameOver>();
+						popupScript.gameWin(1);
 						Debug.Log ("You Win +++++++++++++++++++++");
 				}
 				

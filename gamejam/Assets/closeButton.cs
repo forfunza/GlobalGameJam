@@ -19,6 +19,7 @@ public class closeButton : MonoBehaviour {
 	}
 
 	void OnClick(){
-		GameObject.Destroy(popupMap);
+//		GameObject.Destroy(popupMap);
+		Application.LoadLevel("MainScreen");
 	}
 }

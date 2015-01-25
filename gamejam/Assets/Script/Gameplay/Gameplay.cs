@@ -38,16 +38,17 @@ public class Gameplay: MonoBehaviour
 		void Start ()
 		{	
 				countdown = Config.timeGamePlay [GameEngine.Instance.gameStage - 1];
-				scoreText.text = score.ToString ();
-		tileTree = Resources.Load <Sprite> ("Image/UI_GamePlay/leaft");
-		tileFire = Resources.Load <Sprite> ("Image/UI_GamePlay/fire");
-		tileOil = Resources.Load <Sprite> ("Image/UI_GamePlay/wood");
-		tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block_tree_new");
+	
+				scoreText.text = score.ToString () + "/" + (Config.boxTileStage [GameEngine.Instance.gameStage].GetUpperBound (0) + 1).ToString ();
+				tileTree = Resources.Load <Sprite> ("Image/UI_GamePlay/leaft");
+				tileFire = Resources.Load <Sprite> ("Image/UI_GamePlay/fire");
+				tileOil = Resources.Load <Sprite> ("Image/UI_GamePlay/wood");
+				tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block_tree_new");
 				
 				CreateTiles ();
 				state = (int)State.Normal;
 
-			
+//		Debug.Log ("Box Count " + Config.boxTileStage[GameEngine.Instance.gameStage].GetUpperBound(0));
 
 		}
 	
@@ -55,7 +56,7 @@ public class Gameplay: MonoBehaviour
 		void Update ()
 		{
 
-				if (state == (int)State.Normal) {
+		if (state == (int)State.Normal && isWin == false) {
 						countdown -= Time.deltaTime;
 						if (countdown < 0) {
 								state = (int)State.Lose;
@@ -113,6 +114,7 @@ public class Gameplay: MonoBehaviour
 
 				for (int i =0; i<=boxList.GetUpperBound(0); i++) {
 						GameObject _tileObject = GameObject.Instantiate (tilePrefab, new Vector3 (_tiles [boxList [i, 0].ToString () + boxList [i, 1].ToString ()].gameObject.transform.position.x, _tiles [boxList [i, 0].ToString () + boxList [i, 1].ToString ()].gameObject.transform.position.y, transform.position.z), transform.rotation) as GameObject;
+						_tileObject.transform.localScale = new Vector3 (0.8F, 0.8F, 0);
 						Tile _tile = _tileObject.GetComponent<Tile> ();
 						_tile.type = 4;
 						SpriteRenderer _sprite = _tileObject.GetComponent<SpriteRenderer> ();
@@ -215,8 +217,10 @@ public class Gameplay: MonoBehaviour
 						}
 				}
 				state = (int)State.Normal;
-				scoreText.text = score.ToString ();
-				if (score == Config.SIZE_OF_BOX) {
+				scoreText.text = scoreText.text = score.ToString () + "/" + (Config.boxTileStage [GameEngine.Instance.gameStage].GetUpperBound (0) + 1).ToString ();
+
+				if (score == Config.boxTileStage [GameEngine.Instance.gameStage].GetUpperBound (0) + 1) {
+						
 						state = (int)State.Win;
 						isWin = true;
 						GameObject go = (GameObject)Instantiate (popupGameOver, transform.position, transform.rotation);

@@ -63,6 +63,7 @@
      <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_ShurikenThreadFix.cs" />
      <Compile Include="Assets\JMO Assets\Cartoon FX\Spawn System\CFX_SpawnSystem.cs" />
      <Compile Include="Assets\PopupGameOver.cs" />
+     <Compile Include="Assets\ScaleFromAnimation.cs" />
      <Compile Include="Assets\Script\ButtonSound.cs" />
      <Compile Include="Assets\Script\Config.cs" />
      <Compile Include="Assets\Script\Gameplay\GameEngine.cs" />
@@ -80,6 +81,9 @@
      <Compile Include="Assets\Script\StageButton.cs" />
      <Compile Include="Assets\Script\TestGenarate.cs" />
      <Compile Include="Assets\StatusUserBar.cs" />
+     <Compile Include="Assets\WolrdIMage.cs" />
+     <Compile Include="Assets\animationPopupMap.cs" />
+     <Compile Include="Assets\closeButton.cs" />
      <Compile Include="Assets\okButton.cs" />
      <None Include="Assets\JMO Assets\Cartoon FX\Shaders\CFX3 Multiply Color.shader" />
      <None Include="Assets\JMO Assets\Cartoon FX\Shaders (Mobile)\CFXM_MobileParticleAdd_Alpha8.shader" />

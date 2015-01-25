@@ -13,7 +13,10 @@ public class ManagerButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		if(!PlayerPrefs.HasKey(Config.STAR_OF_STATE+1)){
+			PlayerPrefs.SetInt(Config.STAR_OF_STATE+1,0);
+			PlayerPrefs.Save();
+		}
 	}
 	
 	// Update is called once per frame

@@ -32,7 +32,7 @@ public class Config
 		public const string CLOSE_POPUP = "ClosePopup";
 		public const string GAMEOVER = "Gameover";
 		public const string GAMEPLAY_BGM = "GameplayBgm";
-		public static float TIME_GAMEPLAY = 10.0F;
+		public static float TIME_GAMEPLAY = 5.0F;
 		public const string SOUND = "Sound/";
 
 

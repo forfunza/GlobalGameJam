@@ -29,7 +29,8 @@ public class Gameplay: MonoBehaviour
 				Normal = 1,
 				Check = 2,
 				Lose = 3,
-				Win = 4
+				Win = 4,
+				Prepare = 5
 		}
 
 		public int state;
@@ -51,7 +52,9 @@ public class Gameplay: MonoBehaviour
 				tileDoor = Resources.Load <Sprite> ("Image/UI_GamePlay/block_tree_new");
 				
 				CreateTiles ();
-				state = (int)State.Normal;
+				state = (int)State.Prepare;
+
+				GameObject _introPopup = GameObject.Instantiate(Resources.Load("Prefabs/Popup_Intro")) as GameObject;
 
 //		Debug.Log ("Box Count " + Config.boxTileStage[GameEngine.Instance.gameStage].GetUpperBound(0));
 

@@ -21,6 +21,9 @@ public class okButton : MonoBehaviour {
 
 	void OnClick(){
 //		Application.LoadLevel("MainScreen");
+
+
+		Debug.Log ("Onclick");
 		GameObject go = (GameObject)Instantiate (popupMap, transform.parent.transform.position, transform.parent.transform.rotation);
 		go.transform.parent = transform.parent.transform;
 		go.transform.localScale = new Vector3(1.5f,1.5f,1.5f);

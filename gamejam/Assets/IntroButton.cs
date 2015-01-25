@@ -3,26 +3,18 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class IntroButton : MonoBehaviour {
-
+	private Gameplay _gameplay;
 	private Button _button;
+	public GameObject _popup;
 	// Use this for initialization
 	void Start () {
-		_button = GetComponent<Button>();
-		_button.onClick.AddListener(() => { OnClick(); });
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		_gameplay = GameObject.Find ("Gameplay").GetComponent<Gameplay> ();
 	}
 
-	void OnClick(){
-
-
-
-	}
 
 	public void OnButtonClick(){
-		Debug.Log ("Onclick");
+		_gameplay.state = (int)Gameplay.State.Normal;
+		Destroy(_popup);
+
 	}
 }

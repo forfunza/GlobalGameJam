@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 public class StageButton : MonoBehaviour {
 
 	public int stage;
@@ -35,5 +36,10 @@ public class StageButton : MonoBehaviour {
 			star2.enabled = true;
 			star3.enabled = true;
 		}
+	}
+
+	public void PlayGame(){
+		GameEngine.Instance.gameStage = stage;
+		Application.LoadLevel ("Gameplay");
 	}
 }

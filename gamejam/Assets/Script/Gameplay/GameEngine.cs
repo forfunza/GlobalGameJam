@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameEngine
+public class GameEngine :Singleton <GameEngine>
 {
-
+		public int gameStage = 1;
 		public static List<TileModel> CheckListTileHasBroke (TileModel[,] tiles)
 		{
 				int tempType = 0;

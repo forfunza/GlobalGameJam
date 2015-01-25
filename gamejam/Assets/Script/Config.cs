@@ -17,7 +17,8 @@ public class Config
 		new TileModel(4,0,3)};
 	public static Dictionary<int, int[,]> boxTileStage = new Dictionary<int, int[,]> ()
 	{
-		{1,new [,]{{0,0},{0,1},{0,2},{0,3}}}
+		{1,new [,]{{0,0},{0,1},{0,2},{0,3}}},
+		{2,new [,]{{0,0},{0,1},{0,2},{0,3}}}
 	};
 
 

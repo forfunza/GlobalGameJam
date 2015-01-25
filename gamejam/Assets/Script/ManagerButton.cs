@@ -46,13 +46,14 @@ public class ManagerButton : MonoBehaviour {
 		go.transform.parent = transform.parent.transform;
 		go.transform.localScale = new Vector3(2.061856f,2.061856f,2.061856f);
 
-		Hashtable ht = new Hashtable ();
-		ht.Add ("scale",10.061856f);
-		ht.Add ("time", 3);
-		ht.Add ("easetype","linear");
+//		Hashtable ht = new Hashtable ();
+//		ht.Add ("x", popupMap.transform.position.x);
+//		ht.Add ("y", 175);
+//		ht.Add ("time", 1);
+//		ht.Add ("easetype","spring");
 //		ht.Add ("onComplete", "tweenComplete");
 //		ht.Add ("onCompleteTarget", gameObject);
-		iTween.ScaleFrom (this.gameObject, ht);
+//		iTween.MoveTo (popupMap, ht);
 
 	}
 

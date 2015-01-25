@@ -19,6 +19,6 @@ public class okButton : MonoBehaviour {
 	
 
 	void OnClick(){
-		Application.LoadLevel("WorldMap");
+		Application.LoadLevel("MainScreen");
 	}
 }

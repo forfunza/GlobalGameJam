@@ -16,14 +16,14 @@ public class PopupGameOver : MonoBehaviour {
 		Debug.Log(rectTranform.transform.position.x + " " + rectTranform.transform.position.y + " " + rectTranform.transform.position.z );
 //		rectTranform.position = new Vector3(rectTranform.transform.position.x,168,0);
 
-		Hashtable ht = new Hashtable ();
-		ht.Add ("x", rectTranform.transform.position.x);
-		ht.Add ("y", 270);
-		ht.Add ("time", 1);
-		ht.Add ("easetype","spring");
-		ht.Add ("onComplete", "tweenComplete");
-		ht.Add ("onCompleteTarget", gameObject);
-		iTween.MoveTo (this.gameObject, ht);
+//		Hashtable ht = new Hashtable ();
+//		ht.Add ("x", rectTranform.transform.position.x);
+//		ht.Add ("y", 270);
+//		ht.Add ("time", 1);
+//		ht.Add ("easetype","spring");
+//		ht.Add ("onComplete", "tweenComplete");
+//		ht.Add ("onCompleteTarget", gameObject);
+//		iTween.MoveTo (this.gameObject, ht);
 
 //		gameOver();
 //		gameWin(2);

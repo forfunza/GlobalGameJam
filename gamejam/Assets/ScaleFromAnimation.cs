@@ -6,6 +6,10 @@ public class ScaleFromAnimation : MonoBehaviour {
 	public float time;
 	public iTween.EaseType easeType;
 	public iTween.LoopType loopType;
+	public GameObject title;
+	public float titleTime;
+	public Vector3 amount;
+	public iTween.EaseType titleEaseType;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +22,7 @@ public class ScaleFromAnimation : MonoBehaviour {
 	}
 	public void ScaleSmooth() {
 		iTween.ScaleAdd(this.gameObject,iTween.Hash("amount" ,gg,"time",time,"easeType",easeType.ToString(),"loopType",loopType.ToString()));  
+		iTween.MoveAdd(title,iTween.Hash("amount" ,amount,"time",titleTime,"easeType",titleEaseType.ToString())); 
 
 	}
 

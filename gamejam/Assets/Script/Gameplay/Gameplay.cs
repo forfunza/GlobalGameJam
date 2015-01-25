@@ -60,7 +60,7 @@ public class Gameplay: MonoBehaviour
 		void Update ()
 		{
 
-		if (state == (int)State.Normal && isWin == false) {
+				if (state == (int)State.Normal && isWin == false) {
 						countdown -= Time.deltaTime;
 						if (countdown < 0) {
 								state = (int)State.Lose;
@@ -204,6 +204,13 @@ public class Gameplay: MonoBehaviour
 
 		}
 
+		IEnumerator removeEffect (GameObject effect)
+		{
+				yield return new WaitForSeconds (UnityEngine.Random.Range (1.5F, 3.0F));
+		GameObject.Destroy (AuraEffect);
+		Debug.Log("destroy Effect");
+		}
+
 		void checkTileInBox ()
 		{
 				state = (int)State.Check;
@@ -213,19 +220,20 @@ public class Gameplay: MonoBehaviour
 						for (int cols = 0; cols < Config.SIZE_OF_GRID; cols++) {
 								Tile _checkTile = _tiles [cols.ToString () + rows.ToString ()].GetComponent<Tile> ();
 								if (_checkTile.type == 1) {
-										if (_boxes.ContainsKey (cols.ToString () + rows.ToString ())){
+										if (_boxes.ContainsKey (cols.ToString () + rows.ToString ())) {
 												score++;
-						moveMatchCount++;
-									}
+												moveMatchCount++;
+										}
 								}
 
 
 						}
 				}
 
-		if(moveMatchCount == 1){
-			GameObject.Instantiate(SkyFallEffect);
-		}
+				if (moveMatchCount == 1) {
+						AuraEffect =  GameObject.Instantiate (SkyFallEffect) as GameObject;
+						StartCoroutine (removeEffect (SkyFallEffect));
+				}
 				state = (int)State.Normal;
 				scoreText.text = scoreText.text = score.ToString () + "/" + (Config.boxTileStage [GameEngine.Instance.gameStage].GetUpperBound (0) + 1).ToString ();
 

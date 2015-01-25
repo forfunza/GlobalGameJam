@@ -14,6 +14,7 @@ public class Gameplay: MonoBehaviour
 		protected int score = 0;
 		protected int moveCount = 0;
 		public bool isWin = false;
+		private bool isPopup = false;
 		public Text scoreText;
 		private float countdown;
 		public GameObject popupGameOver;
@@ -62,11 +63,12 @@ public class Gameplay: MonoBehaviour
 
 				if (state == (int)State.Normal && isWin == false) {
 						countdown -= Time.deltaTime;
-						if (countdown < 0) {
+						if (countdown < 0 && !isPopup) {
 								state = (int)State.Lose;
 								GameObject go = (GameObject)Instantiate (popupGameOver, transform.position, transform.rotation);
 								PopupGameOver popupScript = go.GetComponentInChildren<PopupGameOver> ();
 								popupScript.gameOver ();
+								isPopup = true;
 								Debug.Log ("You Lose +++++++++++++++++++");	
 						}
 				}

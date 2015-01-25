@@ -26,13 +26,13 @@ public class SoundManager : Singleton<SoundManager> {
 			bgm.Play ();
 			checkRun = true;
 		}
-		else if (Application.loadedLevelName == "Gameplay" && !checkRun)
+		if (Application.loadedLevelName == "Gameplay" && checkRun)
 		{
-			bgm = gameObject.AddComponent<AudioSource>();
+
 			bgm.clip = (AudioClip) Resources.Load(Config.SOUND+Config.GAMEPLAY_BGM, typeof(AudioClip));
 			bgm.loop = true;
 			bgm.Play ();
-			checkRun = true;
+			checkRun = false;
 		}
 	}
 
